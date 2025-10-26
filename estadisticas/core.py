@@ -114,3 +114,30 @@ class AnalizadorCuantitativo(AnalizadorBase):
         if media == 0:
             raise ValueError("No se puede calcular CV cuando la media es 0")
         return (self.desviacion_estandar() / abs(media)) * 100
+    
+    def percentil(self, p: float) -> float:
+        """
+        Calcula el percentil p-ésimo usando interpolación lineal
+        
+        Args:
+            p: Percentil a calcular (0-100)
+        """
+        if not 0 <= p <= 100:
+            raise ValueError("El percentil debe estar entre 0 y 100")
+        
+        datos_ord = self._ordenar_datos()
+        
+        if p == 0:
+            return datos_ord[0]
+        if p == 100:
+            return datos_ord[-1]
+        
+        # Método de interpolación lineal
+        indice = (p / 100) * (self._n - 1)
+        indice_inferior = int(indice)
+        indice_superior = indice_inferior + 1
+        fraccion = indice - indice_inferior
+        
+        return datos_ord[indice_inferior] + fraccion * (
+            datos_ord[indice_superior] - datos_ord[indice_inferior]
+        )
