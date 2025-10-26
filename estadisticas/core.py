@@ -37,3 +37,6 @@ class AnalizadorBase(ABC):
     
     def __repr__(self):
         return f"{self.__class__.__name__}(n={self._n})"
+    
+class AnalizadorCuantitativo(AnalizadorBase):
+    """Analizador para datos numéricos continuos o discretos."""
