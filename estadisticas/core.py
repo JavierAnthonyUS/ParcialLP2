@@ -6,4 +6,6 @@ realizar análisis estadísticos de diferentes tipos de datos.
 """
 
 from abc import ABC, abstractmethod
-# ... el resto de tu código sigue aquí abajo
+from typing import List, Union, Dict, Tuple
+import math
+from collections import Counter
