@@ -40,3 +40,13 @@ class AnalizadorBase(ABC):
     
 class AnalizadorCuantitativo(AnalizadorBase):
     """Analizador para datos numéricos continuos o discretos."""
+
+    def __init__(self, datos: List[Union[int, float]]):
+        # Validar que todos los datos sean numéricos
+        try:
+            self._validar_datos_numericos(datos)
+        except (ValueError, TypeError) as e:
+            raise TypeError("Todos los datos deben ser numéricos") from e
+        
+        super().__init__(datos)
+        self._datos_ordenados = None
