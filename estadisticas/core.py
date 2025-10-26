@@ -50,3 +50,7 @@ class AnalizadorCuantitativo(AnalizadorBase):
         
         super().__init__(datos)
         self._datos_ordenados = None
+
+    def _validar_datos_numericos(self, datos):
+        """Valida que todos los elementos sean numéricos."""
+        return [float(x) for x in datos]
