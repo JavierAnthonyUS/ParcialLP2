@@ -54,3 +54,9 @@ class AnalizadorCuantitativo(AnalizadorBase):
     def _validar_datos_numericos(self, datos):
         """Valida que todos los elementos sean numéricos."""
         return [float(x) for x in datos]
+    
+    def _ordenar_datos(self):
+        """Ordena los datos si aún no están ordenados."""
+        if self._datos_ordenados is None:
+            self._datos_ordenados = sorted(self._datos)
+        return self._datos_ordenados
