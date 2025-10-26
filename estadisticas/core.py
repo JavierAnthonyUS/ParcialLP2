@@ -6,4 +6,34 @@ realizar análisis estadísticos de diferentes tipos de datos.
 """
 
 from abc import ABC, abstractmethod
-# ... el resto de tu código sigue aquí abajo
+from typing import List, Union, Dict, Tuple
+import math
+from collections import Counter
+
+
+class AnalizadorBase(ABC):
+    """Clase abstracta base para todos los analizadores estadísticos."""
+    
+    def __init__(self, datos: List):
+        if not datos:
+            raise ValueError("El conjunto de datos no puede estar vacío")
+        self._datos = datos
+        self._n = len(datos)
+    
+    @property
+    def datos(self):
+        """Retorna los datos almacenados."""
+        return self._datos
+    
+    @property
+    def n(self):
+        """Retorna el tamaño de la muestra."""
+        return self._n
+    
+    @abstractmethod
+    def resumen(self) -> Dict:
+        """Método abstracto para generar resumen estadístico."""
+        pass
+    
+    def __repr__(self):
+        return f"{self.__class__.__name__}(n={self._n})"
