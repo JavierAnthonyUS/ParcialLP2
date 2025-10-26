@@ -88,3 +88,15 @@ class AnalizadorCuantitativo(AnalizadorBase):
             return modas[0]
         else:
             return modas  # Distribución multimodal
+        
+    def varianza(self, muestral: bool = True) -> float:
+        """
+        Calcula la varianza
+        
+        Args:
+            muestral: Si True, usa n-1 (varianza muestral), si False usa n (poblacional)
+        """
+        media = self.media()
+        suma_cuadrados = sum((x - media) ** 2 for x in self._datos)
+        divisor = self._n - 1 if muestral else self._n
+        return suma_cuadrados / divisor
