@@ -100,3 +100,7 @@ class AnalizadorCuantitativo(AnalizadorBase):
         suma_cuadrados = sum((x - media) ** 2 for x in self._datos)
         divisor = self._n - 1 if muestral else self._n
         return suma_cuadrados / divisor
+    
+    def desviacion_estandar(self, muestral: bool = True) -> float:
+        """Calcula la desviación estándar."""
+        return math.sqrt(self.varianza(muestral))
