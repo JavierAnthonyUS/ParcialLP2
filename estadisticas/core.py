@@ -64,3 +64,13 @@ class AnalizadorCuantitativo(AnalizadorBase):
     def media(self) -> float:
         """Calcula la media aritmética (promedio)."""
         return sum(self._datos) / self._n
+    
+    def mediana(self) -> float:
+        """Calcula la mediana (percentil 50)."""
+        datos_ord = self._ordenar_datos()
+        mitad = self._n // 2
+        
+        if self._n % 2 == 0:
+            return (datos_ord[mitad - 1] + datos_ord[mitad]) / 2
+        else:
+            return datos_ord[mitad]
