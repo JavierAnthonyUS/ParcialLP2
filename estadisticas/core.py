@@ -13,3 +13,9 @@ from collections import Counter
 
 class AnalizadorBase(ABC):
     """Clase abstracta base para todos los analizadores estadísticos."""
+    
+    def __init__(self, datos: List):
+        if not datos:
+            raise ValueError("El conjunto de datos no puede estar vacío")
+        self._datos = datos
+        self._n = len(datos)
