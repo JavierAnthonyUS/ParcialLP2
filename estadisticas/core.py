@@ -60,3 +60,7 @@ class AnalizadorCuantitativo(AnalizadorBase):
         if self._datos_ordenados is None:
             self._datos_ordenados = sorted(self._datos)
         return self._datos_ordenados
+    
+    def media(self) -> float:
+        """Calcula la media aritmética (promedio)."""
+        return sum(self._datos) / self._n
