@@ -5,8 +5,9 @@ Este proyecto es una librería desarrollada en Python para realizar cálculos de
 
 La librería permite analizar conjuntos de datos tanto cuantitativos como cualitativos, ofreciendo un resumen completo de las métricas más importantes.
 
-## Descripción
-
 ## Integrantes del Equipo
+-Javier Anthony Uraco Silva
+-Sebastian fernandez
+Fiorella Fuentes
 
 ## Características Implementadas
