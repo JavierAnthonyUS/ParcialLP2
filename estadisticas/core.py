@@ -24,3 +24,8 @@ class AnalizadorBase(ABC):
     def datos(self):
         """Retorna los datos almacenados."""
         return self._datos
+    
+    @property
+    def n(self):
+        """Retorna el tamaño de la muestra."""
+        return self._n
