@@ -11,3 +11,6 @@ La librería permite analizar conjuntos de datos tanto cuantitativos como cualit
 Fiorella Fuentes
 
 ## Características Implementadas
+-Análisis Cuantitativo: Cálculo de media, mediana, moda, varianza, desviación estándar, percentiles, y más.
+-Análisis Cualitativo: Generación de tablas de frecuencia, cálculo de la moda y métricas de diversidad.
+-Análisis Bivariado: Cálculo de covarianza, correlación y regresión lineal simple.
