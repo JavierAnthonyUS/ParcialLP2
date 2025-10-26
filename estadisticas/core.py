@@ -74,3 +74,17 @@ class AnalizadorCuantitativo(AnalizadorBase):
             return (datos_ord[mitad - 1] + datos_ord[mitad]) / 2
         else:
             return datos_ord[mitad]
+        
+    def moda(self) -> Union[List[float], str]:
+        """Calcula la moda (valor más frecuente)."""
+        frecuencias = Counter(self._datos)
+        max_freq = max(frecuencias.values())
+        
+        modas = [valor for valor, freq in frecuencias.items() if freq == max_freq]
+        
+        if len(modas) == self._n:
+            return "No hay moda (todos los valores son únicos)"
+        elif len(modas) == 1:
+            return modas[0]
+        else:
+            return modas  # Distribución multimodal
