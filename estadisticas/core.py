@@ -19,3 +19,8 @@ class AnalizadorBase(ABC):
             raise ValueError("El conjunto de datos no puede estar vacío")
         self._datos = datos
         self._n = len(datos)
+    
+    @property
+    def datos(self):
+        """Retorna los datos almacenados."""
+        return self._datos
