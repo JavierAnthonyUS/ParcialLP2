@@ -9,3 +9,7 @@ from abc import ABC, abstractmethod
 from typing import List, Union, Dict, Tuple
 import math
 from collections import Counter
+
+
+class AnalizadorBase(ABC):
+    """Clase abstracta base para todos los analizadores estadísticos."""
