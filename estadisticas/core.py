@@ -104,3 +104,13 @@ class AnalizadorCuantitativo(AnalizadorBase):
     def desviacion_estandar(self, muestral: bool = True) -> float:
         """Calcula la desviación estándar."""
         return math.sqrt(self.varianza(muestral))
+    
+    def coeficiente_variacion(self) -> float:
+        """
+        Calcula el coeficiente de variación (CV)
+        Mide la dispersión relativa de los datos
+        """
+        media = self.media()
+        if media == 0:
+            raise ValueError("No se puede calcular CV cuando la media es 0")
+        return (self.desviacion_estandar() / abs(media)) * 100
