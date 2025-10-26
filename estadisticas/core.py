@@ -102,7 +102,7 @@ class AnalizadorCuantitativo(AnalizadorBase):
         return suma_cuadrados / divisor
     
     def desviacion_estandar(self, muestral: bool = True) -> float:
-        """Calcula la desviación estándar."""
+        """Calcula la desviación estándar"""
         return math.sqrt(self.varianza(muestral))
     
     def coeficiente_variacion(self) -> float:
@@ -149,4 +149,6 @@ class AnalizadorCuantitativo(AnalizadorBase):
         """Calcula el rango intercuartílico (IQR)"""
         q1, _, q3 = self.cuartiles()
         return q3 - q1
+    
+    
     
