@@ -139,5 +139,14 @@ class AnalizadorCuantitativo(AnalizadorBase):
         fraccion = indice - indice_inferior
         
         return datos_ord[indice_inferior] + fraccion * (
-            datos_ord[indice_superior] - datos_ord[indice_inferior]
-        )
+            datos_ord[indice_superior] - datos_ord[indice_inferior])
+    
+    def cuartiles(self) -> Tuple[float, float, float]:
+        """Retorna los cuartiles Q1, Q2, Q3"""
+        return (self.percentil(25), self.percentil(50), self.percentil(75))
+    
+    def rango_intercuartilico(self) -> float:
+        """Calcula el rango intercuartílico (IQR)"""
+        q1, _, q3 = self.cuartiles()
+        return q3 - q1
+    
