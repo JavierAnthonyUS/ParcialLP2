@@ -29,3 +29,11 @@ class AnalizadorBase(ABC):
     def n(self):
         """Retorna el tamaño de la muestra."""
         return self._n
+    
+    @abstractmethod
+    def resumen(self) -> Dict:
+        """Método abstracto para generar resumen estadístico."""
+        pass
+    
+    def __repr__(self):
+        return f"{self.__class__.__name__}(n={self._n})"
