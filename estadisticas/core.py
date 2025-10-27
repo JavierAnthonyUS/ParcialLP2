@@ -83,3 +83,27 @@ class AnalizadorBivariado(AnalizadorBase):
             'r_cuadrado': round(r2, 4),
             'regresion_lineal': regresion
         }
+    
+# Función auxiliar para determinar el tipo de datos automáticamente
+def analizar(datos: List, tipo: str = 'auto'):
+    """
+    Función helper para crear el analizador apropiado
+    
+    Args:
+        datos: Lista de datos a analizar
+        tipo: 'cuantitativo', 'cualitativo' o 'auto' (detecta automáticamente)
+    """
+    if tipo == 'auto':
+        # Intentar detectar el tipo de datos
+        try:
+            [float(x) for x in datos]
+            tipo = 'cuantitativo'
+        except (ValueError, TypeError):
+            tipo = 'cualitativo'
+    
+    if tipo == 'cuantitativo':
+        return AnalizadorCuantitativo(datos)
+    elif tipo == 'cualitativo':
+        return AnalizadorCualitativo(datos)
+    else:
+        raise ValueError("Tipo debe ser 'cuantitativo', 'cualitativo' o 'auto'")
