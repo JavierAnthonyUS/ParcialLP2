@@ -50,7 +50,19 @@ class AnalizadorBivariado(AnalizadorBase):
         media_x = sum(self._x) / self._n
         media_y = sum(self._y) / self._n
         
-        # Calcular pendiente (β1)
+        # Calcular la pendiente (β1)
         numerador = sum((x - media_x) * (y - media_y) 
                        for x, y in zip(self._x, self._y))
         denominador = sum((x - media_x) ** 2 for x in self._x)    
+
+        if denominador == 0:
+            raise ValueError("No se puede calcular regresión: varianza de X es 0")
+        
+        beta1 = numerador / denominador
+        beta0 = media_y - beta1 * media_x
+        
+        return {
+            'intercepto': round(beta0, 4),
+            'pendiente': round(beta1, 4),
+            'ecuacion': f"Y = {beta0:.4f} + {beta1:.4f}*X"
+        }
