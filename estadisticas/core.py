@@ -41,3 +41,16 @@ class AnalizadorBivariado(AnalizadorBase):
     def coeficiente_determinacion(self) -> float:
 
         return self.correlacion_pearson() ** 2          
+
+    def regresion_lineal_simple(self) -> Dict[str, float]:
+        """
+        Calcula los parámetros de la regresión lineal simple
+        Y = β0 + β1*X
+        """
+        media_x = sum(self._x) / self._n
+        media_y = sum(self._y) / self._n
+        
+        # Calcular pendiente (β1)
+        numerador = sum((x - media_x) * (y - media_y) 
+                       for x, y in zip(self._x, self._y))
+        denominador = sum((x - media_x) ** 2 for x in self._x)    
