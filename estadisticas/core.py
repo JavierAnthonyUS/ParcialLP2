@@ -1,9 +1,12 @@
-"""
-Módulo principal de la librería de análisis estadístico.
-
-Este módulo contiene las clases base y las implementaciones para
-realizar análisis estadísticos de diferentes tipos de datos.
-"""
-
-from abc import ABC, abstractmethod
-# ... el resto de tu código sigue aquí abajo
+class AnalizadorBivariado(AnalizadorBase):
+    """Analizador para relaciones entre dos variables cuantitativas"""
+    
+    def __init__(self, datos_x: List[Union[int, float]], 
+                 datos_y: List[Union[int, float]]):
+        if len(datos_x) != len(datos_y):
+            raise ValueError("Las dos variables deben tener el mismo tamaño")
+         
+        super().__init__(list(zip(datos_x, datos_y)))
+        self._x = datos_x
+        self._y = datos_y
+        
