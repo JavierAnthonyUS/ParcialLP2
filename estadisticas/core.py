@@ -131,3 +131,27 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("EJEMPLO 2: ANÁLISIS DE DATOS CUALITATIVOS")
     print("=" * 60)
+
+    
+
+    # Datos de ejemplo: preferencias de color
+    colores = ['rojo', 'azul', 'verde', 'azul', 'rojo', 'azul', 
+               'amarillo', 'verde', 'azul', 'rojo', 'azul', 'verde']
+    
+    analizador_cual = AnalizadorCualitativo(colores)
+    
+    print(f"\nDatos: {colores}")
+    print(f"\nTabla de frecuencias:")
+    print("-" * 60)
+    
+    tabla = analizador_cual.tabla_frecuencias()
+    print(f"{'Categoría':<15} {'Frec.Abs':<10} {'Frec.Rel':<10} {'Frec.%':<10}")
+    print("-" * 60)
+    for cat, valores in tabla.items():
+        print(f"{cat:<15} {valores['frecuencia_absoluta']:<10} "
+              f"{valores['frecuencia_relativa']:<10.4f} "
+              f"{valores['frecuencia_porcentual']:<10.2f}")
+    
+    print("\n" + "=" * 60)
+    print("EJEMPLO 3: ANÁLISIS BIVARIADO (CORRELACIÓN Y REGRESIÓN)")
+    print("=" * 60)
