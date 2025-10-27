@@ -36,4 +36,8 @@ class AnalizadorBivariado(AnalizadorBase):
         if desv_x == 0 or desv_y == 0:
             raise ValueError("No se puede calcular correlación con d.s 0")
         
-        return self.covarianza() / (desv_x * desv_y)           
+        return self.covarianza() / (desv_x * desv_y)   
+      
+    def coeficiente_determinacion(self) -> float:
+
+        return self.correlacion_pearson() ** 2          
