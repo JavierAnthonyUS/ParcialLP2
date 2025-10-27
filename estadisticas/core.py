@@ -107,3 +107,27 @@ def analizar(datos: List, tipo: str = 'auto'):
         return AnalizadorCualitativo(datos)
     else:
         raise ValueError("Tipo debe ser 'cuantitativo', 'cualitativo' o 'auto'")
+
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    print("=" * 60)
+    print("EJEMPLO 1: ANÁLISIS DE DATOS CUANTITATIVOS")
+    print("=" * 60)
+    
+    # Datos de ejemplo: edades de estudiantes
+    edades = [22, 23, 21, 25, 24, 23, 22, 26, 24, 23, 21, 27, 25, 24, 23]
+    
+    analizador_cuant = AnalizadorCuantitativo(edades)
+    
+    print(f"\nDatos: {edades}")
+    print(f"\nResumen estadístico:")
+    print("-" * 60)
+    
+    resumen = analizador_cuant.resumen()
+    for clave, valor in resumen.items():
+        print(f"{clave:.<30} {valor}")
+    
+    print("\n" + "=" * 60)
+    print("EJEMPLO 2: ANÁLISIS DE DATOS CUALITATIVOS")
+    print("=" * 60)
