@@ -132,7 +132,7 @@ if __name__ == "__main__":
     print("EJEMPLO 2: ANÁLISIS DE DATOS CUALITATIVOS")
     print("=" * 60)
 
-    
+
 
     # Datos de ejemplo: preferencias de color
     colores = ['rojo', 'azul', 'verde', 'azul', 'rojo', 'azul', 
@@ -155,3 +155,24 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("EJEMPLO 3: ANÁLISIS BIVARIADO (CORRELACIÓN Y REGRESIÓN)")
     print("=" * 60)
+
+
+    # Datos de ejemplo: horas de estudio vs calificación
+    horas_estudio = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    calificaciones = [55, 60, 68, 72, 78, 83, 88, 92, 95]
+    
+    analizador_biv = AnalizadorBivariado(horas_estudio, calificaciones)
+    
+    print(f"\nHoras de estudio: {horas_estudio}")
+    print(f"Calificaciones: {calificaciones}")
+    print(f"\nAnálisis de relación:")
+    print("-" * 60)
+    
+    resumen_biv = analizador_biv.resumen()
+    for clave, valor in resumen_biv.items():
+        if isinstance(valor, dict):
+            print(f"\n{clave}:")
+            for k, v in valor.items():
+                print(f"  {k}: {v}")
+        else:
+            print(f"{clave}: {valor}")
