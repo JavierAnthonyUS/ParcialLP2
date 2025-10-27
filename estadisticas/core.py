@@ -66,3 +66,20 @@ class AnalizadorBivariado(AnalizadorBase):
             'pendiente': round(beta1, 4),
             'ecuacion': f"Y = {beta0:.4f} + {beta1:.4f}*X"
         }
+    
+    def resumen(self) -> Dict:
+        """Genera un resumen del análisis bivariado"""
+        try:
+            regresion = self.regresion_lineal_simple()
+            correlacion = self.correlacion_pearson()
+            r2 = self.coeficiente_determinacion()
+        except ValueError as e:
+            return {'error': str(e)}
+        
+        return {
+            'n': self._n,
+            'covarianza': round(self.covarianza(), 4),
+            'correlacion_pearson': round(correlacion, 4),
+            'r_cuadrado': round(r2, 4),
+            'regresion_lineal': regresion
+        }
