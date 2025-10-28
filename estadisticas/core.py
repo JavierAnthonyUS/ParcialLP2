@@ -262,7 +262,14 @@ class AnalizadorCualitativo(AnalizadorBase):
         Mide la incertidumbre o diversidad de las categorías
         """
         frec_rel = self.frecuencias_relativas()
-        return -sum(p * math.log2(p) for p in frec_rel.values() if p > 0)      
+        return -sum(p * math.log2(p) for p in frec_rel.values() if p > 0)
+    def indice_diversidad_simpson(self) -> float:
+        """
+        Calcula el índice de diversidad de Simpson
+        Mide la probabilidad de que dos elementos elegidos al azar sean diferentes
+        """
+        frec_rel = self.frecuencias_relativas()
+        return 1 - sum(p ** 2 for p in frec_rel.values())      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
