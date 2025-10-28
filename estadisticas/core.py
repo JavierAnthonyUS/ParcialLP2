@@ -189,6 +189,9 @@ class AnalizadorCuantitativo(AnalizadorBase):
     def maximo(self) -> float:
         """Retorna el valor máximo"""
         return max(self._datos)
+    def rango(self) -> float:
+        """Calcula el rango (máximo - mínimo)"""
+        return self.maximo() - self.minimo()
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
