@@ -297,7 +297,17 @@ class AnalizadorCualitativo(AnalizadorBase):
                 'frecuencia_relativa_acumulada': round(frec_rel_acum, 4)
             }
         
-        return tabla      
+        return tabla
+    def resumen(self) -> Dict:
+        """Genera un resumen estadístico para datos cualitativos"""
+        return {
+            'n': self._n,
+            'categorias_unicas': self.categorias_unicas(),
+            'moda': self.moda(),
+            'entropia': round(self.entropia(), 4),
+            'indice_simpson': round(self.indice_diversidad_simpson(), 4),
+            'frecuencias': self.frecuencias_absolutas()
+        }      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
