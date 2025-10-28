@@ -269,7 +269,35 @@ class AnalizadorCualitativo(AnalizadorBase):
         Mide la probabilidad de que dos elementos elegidos al azar sean diferentes
         """
         frec_rel = self.frecuencias_relativas()
-        return 1 - sum(p ** 2 for p in frec_rel.values())      
+        return 1 - sum(p ** 2 for p in frec_rel.values())
+    def tabla_frecuencias(self) -> Dict:
+        """Genera una tabla de frecuencias completa"""
+        frec_abs = self.frecuencias_absolutas()
+        frec_rel = self.frecuencias_relativas()
+        frec_porc = self.frecuencias_porcentuales()
+        
+        # Ordenar por frecuencia descendente
+        categorias_ordenadas = sorted(frec_abs.keys(), 
+                                      key=lambda x: frec_abs[x], 
+                                      reverse=True)
+        
+        tabla = {}
+        frec_acum = 0
+        frec_rel_acum = 0.0
+        
+        for cat in categorias_ordenadas:
+            frec_acum += frec_abs[cat]
+            frec_rel_acum += frec_rel[cat]
+            
+            tabla[cat] = {
+                'frecuencia_absoluta': frec_abs[cat],
+                'frecuencia_relativa': round(frec_rel[cat], 4),
+                'frecuencia_porcentual': frec_porc[cat],
+                'frecuencia_acumulada': frec_acum,
+                'frecuencia_relativa_acumulada': round(frec_rel_acum, 4)
+            }
+        
+        return tabla      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
