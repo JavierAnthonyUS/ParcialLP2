@@ -252,7 +252,10 @@ class AnalizadorCualitativo(AnalizadorBase):
         if len(modas) == 1:
             return modas[0]
         else:
-            return modas      
+            return modas
+    def categorias_unicas(self) -> int:
+        """Retorna el número de categorías únicas"""
+        return len(self._calcular_frecuencias())      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
