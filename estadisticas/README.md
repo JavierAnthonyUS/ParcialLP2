@@ -44,24 +44,58 @@ La librería está completamente implementada usando los principios de **Program
 - Coeficiente de determinación (R²)
 - Regresión lineal simple
 
-## 💡 Ejemplo de Uso
+## 📦 Instalación
 
-Para utilizar la librería, simplemente importa la clase que necesites y pásale tu lista de datos.
+### Requisitos
+- Python 3.7 o superior
+- No requiere librerías externas (implementación pura en Python)
 
+### Pasos de instalación
+
+1. **Clonar el repositorio:**
+```bash
+git clone https://github.com/JavierAnthonyUS/ParcialLP2.git
+cd ParcialLP2/estadisticas
+```
+
+2. **Verificar la instalación:**
+```bash
+python test_estadisticas.py
+```
+
+## 🚀 Guía de Uso
+
+### Ejemplo 1: Análisis de Datos Cuantitativos
 ```python
-# Importa la clase desde el módulo
-from estadisticas.core import AnalizadorCuantitativo
+from core import AnalizadorCuantitativo
 
-# 1. Define tu conjunto de datos
-edades =
+# Datos de ejemplo: calificaciones de estudiantes
+calificaciones = [85, 90, 78, 92, 88, 76, 95, 89, 84, 91, 87, 83, 94, 86, 90]
 
-# 2. Crea una instancia del analizador
-analizador = AnalizadorCuantitativo(edades)
+# Crear el analizador
+analizador = AnalizadorCuantitativo(calificaciones)
 
-# 3. Obtén los resultados
-print("Media de edades:", analizador.media())
-print("Desviación Estándar:", analizador.desviacion_estandar())
+# Obtener estadísticas
+print(f"Media: {analizador.media():.2f}")
+print(f"Mediana: {analizador.mediana():.2f}")
+print(f"Desviación Estándar: {analizador.desviacion_estandar():.2f}")
+print(f"Coeficiente de Variación: {analizador.coeficiente_variacion():.2f}%")
 
-# O un resumen completo
-print("\nResumen completo:")
-print(analizador.resumen())
+# Obtener cuartiles
+q1, q2, q3 = analizador.cuartiles()
+print(f"Q1: {q1:.2f}, Q2: {q2:.2f}, Q3: {q3:.2f}")
+
+# Resumen completo
+resumen = analizador.resumen()
+for clave, valor in resumen.items():
+    print(f"{clave}: {valor}")
+```
+
+**Salida esperada:**
+```
+Media: 87.33
+Mediana: 88.00
+Desviación Estándar: 5.42
+Coeficiente de Variación: 6.21%
+Q1: 84.00, Q2: 88.00, Q3: 91.00
+```
