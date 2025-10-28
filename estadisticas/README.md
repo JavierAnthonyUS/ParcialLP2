@@ -2,29 +2,47 @@
 
 Este repositorio contiene una librería desarrollada en Python para realizar cálculos de estadística descriptiva, utilizando los principios de la Programación Orientada a Objetos (POO).
 
-## 📝 Descripción
+## 👥 Integrantes del Grupo
 
-La librería permite analizar de forma sencilla conjuntos de datos, tanto cuantitativos como cualitativos. Su diseño modular facilita la obtención de un resumen completo de las métricas estadísticas más importantes para cada tipo de dato.
+| Nombre | GitHub |
+|--------|--------|
+| Fiorella Fuentes | [@FiorellaFuentes] |
+| Javier Anthony Uraco | [@JavierAnthonyUS] |
+| Sebastian Fernandez | [@SebastianFernandez] |
 
-## 🚀 Características Implementadas
+**Institución:** Universidad Nacional Agraria la Molina  
+**Curso:** Lenguaje de Programación 2 
+**Profesor:** Ana Vargas 
 
-La librería se estructura en torno a las siguientes clases de análisis:
+## 📖 Descripción
 
-- **`AnalizadorCuantitativo`**:
-  - Cálculo de media, mediana, moda, varianza, desviación estándar, percentiles, cuartiles y más.
+Es una librería completa que permite realizar análisis estadístico descriptivo tanto de datos **cuantitativos** (numéricos) como **cualitativos** (categóricos), además de análisis de relaciones entre variables (**bivariado**).
 
-- **`AnalizadorCualitativo`**:
-  - Generación de tablas de frecuencia (absoluta, relativa y porcentual).
-  - Cálculo de la moda y métricas de diversidad como la entropía.
+La librería está completamente implementada usando los principios de **Programación Orientada a Objetos**, incluyendo:
+- ✅ **Abstracción** mediante clases abstractas
+- ✅ **Encapsulamiento** de datos y métodos privados
+- ✅ **Herencia** con jerarquía de clases
+- ✅ **Polimorfismo** con implementaciones específicas
 
-- **`AnalizadorBivariado`**:
-  - Cálculo de covarianza, correlación de Pearson y regresión lineal simple.
+## 🎯 Características Principales
 
-## 🧑‍💻 Integrantes del Equipo
+### Análisis de Datos Cuantitativos
+- Medidas de tendencia central (media, mediana, moda)
+- Medidas de dispersión (varianza, desviación estándar, coeficiente de variación, rango, IQR)
+- Medidas de posición (percentiles, cuartiles)
+- Medidas de forma (asimetría, curtosis)
+- Resumen de cinco números de Tukey
 
-- **Javier Anthony Uraco Silva**
-- **Sebastian Fernandez**
-- **Fiorella Fuentes**
+### Análisis de Datos Cualitativos
+- Moda y distribución de frecuencias
+- Tablas de frecuencia (absoluta, relativa, porcentual, acumulada)
+- Medidas de diversidad (entropía de Shannon, índice de Simpson)
+
+### Análisis Bivariado
+- Covarianza entre variables
+- Correlación de Pearson
+- Coeficiente de determinación (R²)
+- Regresión lineal simple
 
 ## 💡 Ejemplo de Uso
 
