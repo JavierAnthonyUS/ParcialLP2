@@ -242,7 +242,17 @@ class AnalizadorCualitativo(AnalizadorBase):
     def frecuencias_porcentuales(self) -> Dict[str, float]:
         """Retorna las frecuencias en porcentaje"""
         frec_rel = self.frecuencias_relativas()
-        return {cat: round(freq * 100, 2) for cat, freq in frec_rel.items()}      
+        return {cat: round(freq * 100, 2) for cat, freq in frec_rel.items()}
+    def moda(self) -> Union[List, str]:
+        """Retorna la(s) categoría(s) más frecuente(s)"""
+        frec = self._calcular_frecuencias()
+        max_freq = max(frec.values())
+        modas = [cat for cat, freq in frec.items() if freq == max_freq]
+        
+        if len(modas) == 1:
+            return modas[0]
+        else:
+            return modas      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
