@@ -192,6 +192,27 @@ class AnalizadorCuantitativo(AnalizadorBase):
     def rango(self) -> float:
         """Calcula el rango (máximo - mínimo)"""
         return self.maximo() - self.minimo()
+    def resumen(self) -> Dict:
+        """Genera un resumen estadístico completo"""
+        q1, q2, q3 = self.cuartiles()
+        
+        return {
+            'n': self._n,
+            'media': round(self.media(), 4),
+            'mediana': round(self.mediana(), 4),
+            'moda': self.moda(),
+            'desviacion_estandar': round(self.desviacion_estandar(), 4),
+            'varianza': round(self.varianza(), 4),
+            'coeficiente_variacion': round(self.coeficiente_variacion(), 2),
+            'minimo': round(self.minimo(), 4),
+            'maximo': round(self.maximo(), 4),
+            'rango': round(self.rango(), 4),
+            'Q1': round(q1, 4),
+            'Q2': round(q2, 4),
+            'Q3': round(q3, 4),
+            'IQR': round(self.rango_intercuartilico(), 4),
+            'asimetria': round(self.asimetria(), 4),
+            'curtosis': round(self.curtosis(), 4)}
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
