@@ -234,7 +234,11 @@ class AnalizadorCualitativo(AnalizadorBase):
         return self._frecuencias
     def frecuencias_absolutas(self) -> Dict:
         """Retorna las frecuencias absolutas de cada categoría"""
-        return dict(self._calcular_frecuencias())      
+        return dict(self._calcular_frecuencias())
+    def frecuencias_relativas(self) -> Dict[str, float]:
+        """Retorna las frecuencias relativas (proporciones)"""
+        frec_abs = self._calcular_frecuencias()
+        return {cat: freq / self._n for cat, freq in frec_abs.items()}      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
