@@ -183,6 +183,9 @@ class AnalizadorCuantitativo(AnalizadorBase):
         
         suma_cuartos = sum(((x - media) / desv_std) ** 4 for x in self._datos)
         return (suma_cuartos / self._n) - 3
+    def minimo(self) -> float:
+        """Retorna el valor mínimo"""
+        return min(self._datos)
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
