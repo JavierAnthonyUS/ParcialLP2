@@ -1,4 +1,14 @@
+"""
+EstadisticaPy - Librería de Análisis Estadístico
+Autor: 
+Fiorella Fuentes
+Javier Anthony Uraco
+Sebastian Fernandez
+Versión: 1.0
 
+Una librería orientada a objetos para realizar análisis estadístico
+descriptivo de datos cuantitativos y cualitativos.
+"""
 from abc import ABC, abstractmethod
 from typing import List, Union, Dict, Tuple
 import math
