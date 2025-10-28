@@ -223,7 +223,10 @@ class AnalizadorCuantitativo(AnalizadorBase):
             'Q3': q3,
             'maximo': self.maximo()}
 class AnalizadorCualitativo(AnalizadorBase):
-    """Analizador para datos categóricos o nominales"""    
+    """Analizador para datos categóricos o nominales"""
+    def __init__(self, datos: List):
+        super().__init__(datos)
+        self._frecuencias = None  
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
