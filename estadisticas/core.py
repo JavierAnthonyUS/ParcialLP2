@@ -231,7 +231,10 @@ class AnalizadorCualitativo(AnalizadorBase):
         """Calcula las frecuencias si aún no están calculadas"""
         if self._frecuencias is None:
             self._frecuencias = Counter(self._datos)
-        return self._frecuencias      
+        return self._frecuencias
+    def frecuencias_absolutas(self) -> Dict:
+        """Retorna las frecuencias absolutas de cada categoría"""
+        return dict(self._calcular_frecuencias())      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
