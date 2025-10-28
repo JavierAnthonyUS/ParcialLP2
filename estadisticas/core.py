@@ -153,6 +153,21 @@ class AnalizadorCuantitativo(AnalizadorBase):
         """Calcula el rango intercuartílico (IQR)"""
         q1, _, q3 = self.cuartiles()
         return q3 - q1
+     def asimetria(self) -> float:
+        """
+        Calcula el coeficiente de asimetría de Fisher (sesgo)
+        > 0: asimétrica a la derecha
+        < 0: asimétrica a la izquierda
+        ≈ 0: simétrica
+        """
+        media = self.media()
+        desv_std = self.desviacion_estandar(muestral=False)
+        
+        if desv_std == 0:
+            return 0.0
+        
+        suma_cubos = sum(((x - media) / desv_std) ** 3 for x in self._datos)
+        return suma_cubos / self._n
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
