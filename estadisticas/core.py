@@ -213,6 +213,15 @@ class AnalizadorCuantitativo(AnalizadorBase):
             'IQR': round(self.rango_intercuartilico(), 4),
             'asimetria': round(self.asimetria(), 4),
             'curtosis': round(self.curtosis(), 4)}
+    def resumen_cinco_numeros(self) -> Dict:
+        """Retorna el resumen de cinco números de Tukey"""
+        q1, q2, q3 = self.cuartiles()
+        return {
+            'minimo': self.minimo(),
+            'Q1': q1,
+            'mediana': q2,
+            'Q3': q3,
+            'maximo': self.maximo()}
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
