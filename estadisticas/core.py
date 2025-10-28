@@ -222,6 +222,8 @@ class AnalizadorCuantitativo(AnalizadorBase):
             'mediana': q2,
             'Q3': q3,
             'maximo': self.maximo()}
+class AnalizadorCualitativo(AnalizadorBase):
+    """Analizador para datos categóricos o nominales"""    
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
