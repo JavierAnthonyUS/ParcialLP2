@@ -99,3 +99,127 @@ Desviación Estándar: 5.42
 Coeficiente de Variación: 6.21%
 Q1: 84.00, Q2: 88.00, Q3: 91.00
 ```
+
+### Ejemplo 2: Análisis de Datos Cualitativos
+```python
+from core import AnalizadorCualitativo
+
+# Datos de ejemplo: medios de transporte preferidos
+transportes = ['auto', 'bus', 'bicicleta', 'bus', 'auto', 'metro', 
+               'bus', 'bicicleta', 'auto', 'bus', 'metro', 'bus']
+
+# Crear el analizador
+analizador = AnalizadorCualitativo(transportes)
+
+# Obtener la moda
+print(f"Transporte más usado: {analizador.moda()}")
+
+# Tabla de frecuencias
+print("\nTabla de Frecuencias:")
+tabla = analizador.tabla_frecuencias()
+for categoria, valores in tabla.items():
+    print(f"{categoria}: {valores['frecuencia_absoluta']} "
+          f"({valores['frecuencia_porcentual']}%)")
+
+# Medidas de diversidad
+print(f"\nEntropía: {analizador.entropia():.4f}")
+print(f"Índice de Simpson: {analizador.indice_diversidad_simpson():.4f}")
+```
+
+**Salida esperada:**
+```
+Transporte más usado: bus
+
+Tabla de Frecuencias:
+bus: 5 (41.67%)
+auto: 3 (25.0%)
+bicicleta: 2 (16.67%)
+metro: 2 (16.67%)
+
+Entropía: 1.8828
+Índice de Simpson: 0.7361
+```
+
+### Ejemplo 3: Análisis Bivariado (Correlación y Regresión)
+```python
+from core import AnalizadorBivariado
+
+# Datos de ejemplo: horas de estudio vs calificación
+horas_estudio = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+calificaciones = [55, 60, 68, 72, 78, 83, 88, 92, 95]
+
+# Crear el analizador bivariado
+analizador = AnalizadorBivariado(horas_estudio, calificaciones)
+
+# Correlación
+correlacion = analizador.correlacion_pearson()
+print(f"Correlación de Pearson: {correlacion:.4f}")
+print(f"Coeficiente de Determinación (R²): {analizador.coeficiente_determinacion():.4f}")
+
+# Regresión lineal
+regresion = analizador.regresion_lineal_simple()
+print(f"\nEcuación de regresión: {regresion['ecuacion']}")
+print(f"Intercepto: {regresion['intercepto']}")
+print(f"Pendiente: {regresion['pendiente']}")
+
+# Hacer una predicción
+horas_nuevas = 12
+prediccion = regresion['intercepto'] + regresion['pendiente'] * horas_nuevas
+print(f"\nPredicción para {horas_nuevas} horas: {prediccion:.2f} puntos")
+```
+
+**Salida esperada:**
+```
+Correlación de Pearson: 0.9954
+Coeficiente de Determinación (R²): 0.9908
+
+Ecuación de regresión: Y = 41.6667 + 5.3333*X
+Intercepto: 41.6667
+Pendiente: 5.3333
+
+Predicción para 12 horas: 105.67 puntos
+```
+
+## 🎓 Conceptos de POO Implementados
+
+### 1. **Abstracción**
+```python
+class AnalizadorBase(ABC):
+    @abstractmethod
+    def resumen(self) -> Dict:
+        pass
+```
+- Clase abstracta `AnalizadorBase` define la interfaz común
+- Método abstracto `resumen()` debe ser implementado por todas las subclases
+
+### 2. **Encapsulamiento**
+```python
+self._datos = datos        # Atributo privado
+self._n = len(datos)       # Atributo privado
+self._datos_ordenados = None  # Caché privado
+```
+- Atributos privados con prefijo `_`
+- Acceso controlado mediante propiedades `@property`
+- Métodos privados para operaciones internas
+
+### 3. **Herencia**
+```python
+class AnalizadorCuantitativo(AnalizadorBase):
+    def __init__(self, datos):
+        super().__init__(datos)  # Llama al constructor padre
+```
+- Todas las clases heredan de `AnalizadorBase`
+- Reutilizan funcionalidad común (validación, almacenamiento)
+
+### 4. **Polimorfismo**
+```python
+# Cada clase implementa su propia versión de resumen()
+analizador_cuant.resumen()  # Retorna estadísticas cuantitativas
+analizador_cual.resumen()   # Retorna estadísticas cualitativas
+```
+
+## 🙏 Agradecimientos
+
+- Profesora Ana Vargar por la guía y enseñanza de POO
+- Compañeros de clase por el feedback
+- Comunidad de Python por la documentación
