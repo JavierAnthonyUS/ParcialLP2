@@ -226,7 +226,12 @@ class AnalizadorCualitativo(AnalizadorBase):
     """Analizador para datos categóricos o nominales"""
     def __init__(self, datos: List):
         super().__init__(datos)
-        self._frecuencias = None  
+        self._frecuencias = None
+    def _calcular_frecuencias(self):
+        """Calcula las frecuencias si aún no están calculadas"""
+        if self._frecuencias is None:
+            self._frecuencias = Counter(self._datos)
+        return self._frecuencias      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
