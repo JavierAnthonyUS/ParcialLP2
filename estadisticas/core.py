@@ -255,7 +255,14 @@ class AnalizadorCualitativo(AnalizadorBase):
             return modas
     def categorias_unicas(self) -> int:
         """Retorna el número de categorías únicas"""
-        return len(self._calcular_frecuencias())      
+        return len(self._calcular_frecuencias())
+    def entropia(self) -> float:
+        """
+        Calcula la entropía de Shannon
+        Mide la incertidumbre o diversidad de las categorías
+        """
+        frec_rel = self.frecuencias_relativas()
+        return -sum(p * math.log2(p) for p in frec_rel.values() if p > 0)      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
