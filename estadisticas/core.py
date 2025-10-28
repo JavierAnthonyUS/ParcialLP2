@@ -1,4 +1,14 @@
+"""
+EstadisticaPy - Librería de Análisis Estadístico
+Autor: 
+Fiorella Fuentes
+Javier Anthony Uraco
+Sebastian Fernandez
+Versión: 1.0
 
+Una librería orientada a objetos para realizar análisis estadístico
+descriptivo de datos cuantitativos y cualitativos.
+"""
 from abc import ABC, abstractmethod
 from typing import List, Union, Dict, Tuple
 import math
@@ -143,6 +153,161 @@ class AnalizadorCuantitativo(AnalizadorBase):
         """Calcula el rango intercuartílico (IQR)"""
         q1, _, q3 = self.cuartiles()
         return q3 - q1
+    def asimetria(self) -> float:
+        """
+        Calcula el coeficiente de asimetría de Fisher (sesgo)
+        > 0: asimétrica a la derecha
+        < 0: asimétrica a la izquierda
+        ≈ 0: simétrica
+        """
+        media = self.media()
+        desv_std = self.desviacion_estandar(muestral=False)
+        
+        if desv_std == 0:
+            return 0.0
+        
+        suma_cubos = sum(((x - media) / desv_std) ** 3 for x in self._datos)
+        return suma_cubos / self._n
+    def curtosis(self) -> float:
+        """
+        Calcula el coeficiente de curtosis (exceso de curtosis)
+        > 0: leptocúrtica (colas pesadas)
+        < 0: platicúrtica (colas ligeras)
+        ≈ 0: mesocúrtica (similar a normal)
+        """
+        media = self.media()
+        desv_std = self.desviacion_estandar(muestral=False)
+        
+        if desv_std == 0:
+            return 0.0
+        
+        suma_cuartos = sum(((x - media) / desv_std) ** 4 for x in self._datos)
+        return (suma_cuartos / self._n) - 3
+    def minimo(self) -> float:
+        """Retorna el valor mínimo"""
+        return min(self._datos)
+    def maximo(self) -> float:
+        """Retorna el valor máximo"""
+        return max(self._datos)
+    def rango(self) -> float:
+        """Calcula el rango (máximo - mínimo)"""
+        return self.maximo() - self.minimo()
+    def resumen(self) -> Dict:
+        """Genera un resumen estadístico completo"""
+        q1, q2, q3 = self.cuartiles()
+        
+        return {
+            'n': self._n,
+            'media': round(self.media(), 4),
+            'mediana': round(self.mediana(), 4),
+            'moda': self.moda(),
+            'desviacion_estandar': round(self.desviacion_estandar(), 4),
+            'varianza': round(self.varianza(), 4),
+            'coeficiente_variacion': round(self.coeficiente_variacion(), 2),
+            'minimo': round(self.minimo(), 4),
+            'maximo': round(self.maximo(), 4),
+            'rango': round(self.rango(), 4),
+            'Q1': round(q1, 4),
+            'Q2': round(q2, 4),
+            'Q3': round(q3, 4),
+            'IQR': round(self.rango_intercuartilico(), 4),
+            'asimetria': round(self.asimetria(), 4),
+            'curtosis': round(self.curtosis(), 4)}
+    def resumen_cinco_numeros(self) -> Dict:
+        """Retorna el resumen de cinco números de Tukey"""
+        q1, q2, q3 = self.cuartiles()
+        return {
+            'minimo': self.minimo(),
+            'Q1': q1,
+            'mediana': q2,
+            'Q3': q3,
+            'maximo': self.maximo()}
+class AnalizadorCualitativo(AnalizadorBase):
+    """Analizador para datos categóricos o nominales"""
+    def __init__(self, datos: List):
+        super().__init__(datos)
+        self._frecuencias = None
+    def _calcular_frecuencias(self):
+        """Calcula las frecuencias si aún no están calculadas"""
+        if self._frecuencias is None:
+            self._frecuencias = Counter(self._datos)
+        return self._frecuencias
+    def frecuencias_absolutas(self) -> Dict:
+        """Retorna las frecuencias absolutas de cada categoría"""
+        return dict(self._calcular_frecuencias())
+    def frecuencias_relativas(self) -> Dict[str, float]:
+        """Retorna las frecuencias relativas (proporciones)"""
+        frec_abs = self._calcular_frecuencias()
+        return {cat: freq / self._n for cat, freq in frec_abs.items()}
+    def frecuencias_porcentuales(self) -> Dict[str, float]:
+        """Retorna las frecuencias en porcentaje"""
+        frec_rel = self.frecuencias_relativas()
+        return {cat: round(freq * 100, 2) for cat, freq in frec_rel.items()}
+    def moda(self) -> Union[List, str]:
+        """Retorna la(s) categoría(s) más frecuente(s)"""
+        frec = self._calcular_frecuencias()
+        max_freq = max(frec.values())
+        modas = [cat for cat, freq in frec.items() if freq == max_freq]
+        
+        if len(modas) == 1:
+            return modas[0]
+        else:
+            return modas
+    def categorias_unicas(self) -> int:
+        """Retorna el número de categorías únicas"""
+        return len(self._calcular_frecuencias())
+    def entropia(self) -> float:
+        """
+        Calcula la entropía de Shannon
+        Mide la incertidumbre o diversidad de las categorías
+        """
+        frec_rel = self.frecuencias_relativas()
+        return -sum(p * math.log2(p) for p in frec_rel.values() if p > 0)
+    def indice_diversidad_simpson(self) -> float:
+        """
+        Calcula el índice de diversidad de Simpson
+        Mide la probabilidad de que dos elementos elegidos al azar sean diferentes
+        """
+        frec_rel = self.frecuencias_relativas()
+        return 1 - sum(p ** 2 for p in frec_rel.values())
+    def tabla_frecuencias(self) -> Dict:
+        """Genera una tabla de frecuencias completa"""
+        frec_abs = self.frecuencias_absolutas()
+        frec_rel = self.frecuencias_relativas()
+        frec_porc = self.frecuencias_porcentuales()
+        
+        # Ordenar por frecuencia descendente
+        categorias_ordenadas = sorted(frec_abs.keys(), 
+                                      key=lambda x: frec_abs[x], 
+                                      reverse=True)
+        
+        tabla = {}
+        frec_acum = 0
+        frec_rel_acum = 0.0
+        
+        for cat in categorias_ordenadas:
+            frec_acum += frec_abs[cat]
+            frec_rel_acum += frec_rel[cat]
+            
+            tabla[cat] = {
+                'frecuencia_absoluta': frec_abs[cat],
+                'frecuencia_relativa': round(frec_rel[cat], 4),
+                'frecuencia_porcentual': frec_porc[cat],
+                'frecuencia_acumulada': frec_acum,
+                'frecuencia_relativa_acumulada': round(frec_rel_acum, 4)
+            }
+        
+        return tabla
+    def resumen(self) -> Dict:
+        """Genera un resumen estadístico para datos cualitativos"""
+        return {
+            'n': self._n,
+            'categorias_unicas': self.categorias_unicas(),
+            'moda': self.moda(),
+            'entropia': round(self.entropia(), 4),
+            'indice_simpson': round(self.indice_diversidad_simpson(), 4),
+            'frecuencias': self.frecuencias_absolutas()
+        }      
 
 class AnalizadorBivariado(AnalizadorBase):
     """Analizador para relaciones entre dos variables cuantitativas"""
