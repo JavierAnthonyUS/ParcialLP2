@@ -139,15 +139,17 @@ Permite que diferentes clases implementen el mismo método de diferentes maneras
 - **Cuartiles:** Dividen los datos en 4 partes iguales (Q1, Q2, Q3)
 
 #### **Medidas de Forma**
-- **Asimetría (Skewness):** Mide la simetría de la distribución
-  ```
+- **Asimetría (Skewness):** Mide la simetría de la distribución (Fisher)
+```
   Skewness = [n / ((n-1)(n-2))] × Σ[(xi - x̄) / s]³
-  ```
+  Donde s es la desviación estándar muestral
+```
 
-- **Curtosis:** Mide el "apuntamiento" de la distribución
-  ```
-  Kurtosis = [n(n+1) / ((n-1)(n-2)(n-3))] × Σ[(xi - x̄) / s]⁴ - 3
-  ```
+- **Curtosis (Exceso):** Mide el "apuntamiento" de la distribución (Fisher)
+```
+  Kurtosis = [n(n+1) / ((n-1)(n-2)(n-3))] × Σ[(xi - x̄) / s]⁴ - [3(n-1)² / ((n-2)(n-3))]
+  Donde s es la desviación estándar muestral
+```
 
 #### **Análisis Bivariado**
 - **Covarianza:** Medida de variación conjunta
@@ -261,5 +263,26 @@ ParcialLP2/
 
 ```python
 from abc import ABC, abstractmethod
-
+"""Clase abstracta base para todos los analizadores estadísticos."""
+    
+    def __init__(self, datos: List):
+        if not datos:
+            raise ValueError("El conjunto de datos no puede estar vacío")
+        self._datos = datos
+        self._n = len(datos)
+    
+    @property
+    def datos(self):
+        """Retorna los datos almacenados."""
+        return self._datos
+    
+    @property
+    def n(self):
+        """Retorna el tamaño de la muestra."""
+        return self._n
+    
+    @abstractmethod
+    def resumen(self) -> Dict:
+        """Método abstracto para generar resumen estadístico."""
+        pass
 class AnalizadorBase(ABC):
