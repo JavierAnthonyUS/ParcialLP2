@@ -263,10 +263,11 @@ ParcialLP2/
 ## 5. IMPLEMENTACIÓN
 
 ### 5.1 Clase Base: AnalizadorBase
-
 ```python
 from abc import ABC, abstractmethod
-"""Clase abstracta base para todos los analizadores estadísticos."""
+
+class AnalizadorBase(ABC):
+    """Clase abstracta base para todos los analizadores estadísticos."""
     
     def __init__(self, datos: List):
         if not datos:
@@ -288,7 +289,7 @@ from abc import ABC, abstractmethod
     def resumen(self) -> Dict:
         """Método abstracto para generar resumen estadístico."""
         pass
-class AnalizadorBase(ABC):
+```
 
 **Características implementadas:**
 - Constructor que valida datos no vacíos
