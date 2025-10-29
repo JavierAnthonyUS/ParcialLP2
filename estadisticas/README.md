@@ -13,8 +13,9 @@ Este repositorio contiene una librería desarrollada en Python para realizar cá
 | Sebastian Fernandez | [TucoSquare](https://github.com/TucoSquare) |
 
 **Institución:** Universidad Nacional Agraria la Molina  
-**Curso:** Lenguaje de Programación 2 
-**Profesor:** Ana Vargas 
+**Curso:** Lenguaje de Programación 2  
+**Profesor:** Ana Vargas  
+**Fecha de entrega:** 28 de octubre de 2025   
 
 ## 📖 Descripción
 
