@@ -6,9 +6,9 @@ Este repositorio contiene una librería desarrollada en Python para realizar cá
 
 | Nombre | GitHub |
 |--------|--------|
-| Fiorella Fuentes | [@fiorellafuentesb20-cell] |
-| Javier Anthony Uraco | [@JavierAnthonyUS] |
-| Sebastian Fernandez | [@TucoSquare] |
+| Fiorella Fuentes | [fiorellafuentesb20-cell](https://github.com/fiorellafuentesb20-cell) |
+| Javier Anthony Uraco | [JavierAnthonyUS](https://github.com/JavierAnthonyUS) |
+| Sebastian Fernandez | [TucoSquare](https://github.com/TucoSquare) |
 
 **Institución:** Universidad Nacional Agraria la Molina  
 **Curso:** Lenguaje de Programación 2 
@@ -93,10 +93,10 @@ for clave, valor in resumen.items():
 
 **Salida esperada:**
 ```
-Media: 87.33
+Media: 87.20
 Mediana: 88.00
-Desviación Estándar: 5.42
-Coeficiente de Variación: 6.21%
+Desviación Estándar: 5.44
+Coeficiente de Variación: 6.24%
 Q1: 84.00, Q2: 88.00, Q3: 91.00
 ```
 
@@ -170,14 +170,14 @@ print(f"\nPredicción para {horas_nuevas} horas: {prediccion:.2f} puntos")
 
 **Salida esperada:**
 ```
-Correlación de Pearson: 0.9954
-Coeficiente de Determinación (R²): 0.9908
+Correlación de Pearson: 0.9923
+Coeficiente de Determinación (R²): 0.9847
 
-Ecuación de regresión: Y = 41.6667 + 5.3333*X
-Intercepto: 41.6667
-Pendiente: 5.3333
+Ecuación de regresión: Y = 45.1212 + 5.0848*X
+Intercepto: 45.1212
+Pendiente: 5.0848
 
-Predicción para 12 horas: 105.67 puntos
+Predicción para 12 horas: 106.14 puntos
 ```
 
 ## 🎓 Conceptos de POO Implementados
