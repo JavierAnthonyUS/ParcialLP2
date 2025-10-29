@@ -286,3 +286,107 @@ from abc import ABC, abstractmethod
         """Método abstracto para generar resumen estadístico."""
         pass
 class AnalizadorBase(ABC):
+
+**Características implementadas:**
+- Constructor que valida datos no vacíos
+- Atributos privados `_datos` y `_n` (encapsulamiento)
+- Propiedades de solo lectura usando `@property`
+- Método abstracto `resumen()` que obliga a las subclases a implementarlo
+
+### 5.2 Clase AnalizadorCuantitativo
+
+Esta clase hereda de `AnalizadorBase` e implementa todos los métodos estadísticos para datos numéricos.
+```python
+class AnalizadorCuantitativo(AnalizadorBase):
+    """Analizador para datos numéricos continuos o discretos."""
+    
+    def __init__(self, datos: List[Union[int, float]]):
+        # Validación de datos numéricos
+        try:
+            self._validar_datos_numericos(datos)
+        except (ValueError, TypeError) as e:
+            raise TypeError("Todos los datos deben ser numéricos") from e
+        
+        super().__init__(datos)
+        self._datos_ordenados = None  # Caché para optimización
+```
+
+**Métodos principales implementados:**
+- Media, mediana, moda
+- Varianza y desviación estándar (muestral y poblacional)
+- Coeficiente de variación
+- Percentiles y cuartiles
+- Asimetría y curtosis (fórmulas de Fisher)
+- Resumen estadístico completo
+
+### 5.3 Clase AnalizadorCualitativo
+
+Especializada en el análisis de datos categóricos.
+```python
+class AnalizadorCualitativo(AnalizadorBase):
+    """Analizador para datos categóricos o nominales"""
+    
+    def __init__(self, datos: List):
+        super().__init__(datos)
+        self._frecuencias = None  # Caché
+```
+
+**Funcionalidades:**
+- Frecuencias absolutas, relativas y porcentuales
+- Tabla de frecuencias completa con acumuladas
+- Moda para datos categóricos
+- Entropía de Shannon
+- Índice de diversidad de Simpson
+
+### 5.4 Clase AnalizadorBivariado
+
+Permite analizar la relación entre dos variables cuantitativas.
+```python
+class AnalizadorBivariado(AnalizadorBase):
+    """Analizador para relaciones entre dos variables cuantitativas"""
+    
+    def __init__(self, datos_x: List[Union[int, float]], 
+                 datos_y: List[Union[int, float]]):
+        if len(datos_x) != len(datos_y):
+            raise ValueError("Las dos variables deben tener el mismo tamaño")
+        
+        super().__init__(list(zip(datos_x, datos_y)))
+        self._x = datos_x
+        self._y = datos_y
+```
+
+**Capacidades:**
+- Covarianza
+- Correlación de Pearson
+- Coeficiente de determinación (R²)
+- Regresión lineal simple
+
+---
+
+## 6. PRUEBAS Y VALIDACIÓN
+
+Se implementó un conjunto completo de pruebas en `test_core.py` que verifica:
+
+1. ✅ Funcionamiento correcto de AnalizadorCuantitativo
+2. ✅ Funcionamiento correcto de AnalizadorCualitativo
+3. ✅ Funcionamiento correcto de AnalizadorBivariado
+4. ✅ Función helper con detección automática
+5. ✅ Manejo de casos borde y validaciones
+
+**Resultados:** Todos los tests pasan exitosamente, validando la correcta implementación de la librería.
+
+---
+
+## 7. CONCLUSIONES
+
+CorePy es una librería educativa y funcional que:
+
+- ✅ Implementa correctamente los 4 pilares de POO
+- ✅ Proporciona análisis estadístico completo
+- ✅ Está bien documentada y probada
+- ✅ No depende de librerías externas
+- ✅ Es fácil de usar y entender
+
+La librería cumple con todos los objetivos propuestos y sirve tanto para análisis real como para aprendizaje de POO en Python.
+
+---
