@@ -6,7 +6,7 @@ Este repositorio contiene una librería desarrollada en Python para realizar cá
 
 | Nombre | GitHub |
 |--------|--------|
-| Fiorella Fuentes | [@FiorellaFuentes] |
+| Fiorella Fuentes | [@fiorellafuentesb20-cell] |
 | Javier Anthony Uraco | [@JavierAnthonyUS] |
 | Sebastian Fernandez | [@TucoSquare] |
 
