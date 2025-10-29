@@ -393,3 +393,5 @@ CorePy es una librería educativa y funcional que:
 La librería cumple con todos los objetivos propuestos y sirve tanto para análisis real como para aprendizaje de POO en Python.
 
 ---
+
+**Fin del Reporte Técnico**
