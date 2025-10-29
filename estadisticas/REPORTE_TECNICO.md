@@ -23,13 +23,6 @@
 3. [Marco Teórico](#3-marco-teórico)
 4. [Diseño y Arquitectura](#4-diseño-y-arquitectura)
 5. [Implementación](#5-implementación)
-6. [Conceptos de POO Aplicados](#6-conceptos-de-poo-aplicados)
-7. [Casos de Uso y Ejemplos](#7-casos-de-uso-y-ejemplos)
-8. [Pruebas y Validación](#8-pruebas-y-validación)
-9. [Resultados](#9-resultados)
-10. [Conclusiones](#10-conclusiones)
-11. [Referencias](#11-referencias)
-
 ---
 
 ## 1. INTRODUCCIÓN
