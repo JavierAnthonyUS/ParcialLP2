@@ -117,7 +117,7 @@ class AnalizadorCuantitativo(AnalizadorBase):
         media = self.media()
         if media == 0:
             raise ValueError("No se puede calcular CV cuando la media es 0")
-        return (self.desviacion_estandar() / abs(media)) * 100
+        return (self.desviacion_estandar() / media) * 100
     
     def percentil(self, p: float) -> float:
         """
@@ -153,6 +153,7 @@ class AnalizadorCuantitativo(AnalizadorBase):
         """Calcula el rango intercuartílico (IQR)"""
         q1, _, q3 = self.cuartiles()
         return q3 - q1
+
     def asimetria(self) -> float:
         """
         Calcula el coeficiente de asimetría de Fisher (sesgo)
@@ -160,14 +161,19 @@ class AnalizadorCuantitativo(AnalizadorBase):
         < 0: asimétrica a la izquierda
         ≈ 0: simétrica
         """
+        if self._n < 3:
+            raise ValueError("Se necesitan al menos 3 datos para calcular asimetría")
+        
         media = self.media()
-        desv_std = self.desviacion_estandar(muestral=False)
+        desv_std = self.desviacion_estandar(muestral=True)
         
         if desv_std == 0:
             return 0.0
         
         suma_cubos = sum(((x - media) / desv_std) ** 3 for x in self._datos)
-        return suma_cubos / self._n
+        # Fórmula de Fisher para asimetría muestral
+        return (self._n * suma_cubos) / ((self._n - 1) * (self._n - 2))
+        
     def curtosis(self) -> float:
         """
         Calcula el coeficiente de curtosis (exceso de curtosis)
@@ -175,14 +181,24 @@ class AnalizadorCuantitativo(AnalizadorBase):
         < 0: platicúrtica (colas ligeras)
         ≈ 0: mesocúrtica (similar a normal)
         """
+        if self._n < 4:
+            raise ValueError("Se necesitan al menos 4 datos para calcular curtosis")
+        
         media = self.media()
-        desv_std = self.desviacion_estandar(muestral=False)
+        desv_std = self.desviacion_estandar(muestral=True)
         
         if desv_std == 0:
             return 0.0
         
         suma_cuartos = sum(((x - media) / desv_std) ** 4 for x in self._datos)
-        return (suma_cuartos / self._n) - 3
+        
+        # Fórmula de Fisher para curtosis muestral (exceso de curtosis)
+        n = self._n
+        termino1 = (n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))
+        termino2 = (3 * (n - 1) ** 2) / ((n - 2) * (n - 3))
+        
+        return termino1 * suma_cuartos - termino2
+        
     def minimo(self) -> float:
         """Retorna el valor mínimo"""
         return min(self._datos)
