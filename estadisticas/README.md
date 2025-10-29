@@ -60,7 +60,7 @@ cd ParcialLP2/estadisticas
 
 2. **Verificar la instalación:**
 ```bash
-python test_estadisticas.py
+python test_core.py
 ```
 
 ## 🚀 Guía de Uso
