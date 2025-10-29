@@ -1,5 +1,5 @@
 """
-EstadisticaPy - Librería de Análisis Estadístico
+CorePy - Librería de Análisis Estadístico
 Autor: 
 Fiorella Fuentes
 Javier Anthony Uraco
