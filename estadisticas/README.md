@@ -8,7 +8,7 @@ Este repositorio contiene una librería desarrollada en Python para realizar cá
 |--------|--------|
 | Fiorella Fuentes | [@FiorellaFuentes] |
 | Javier Anthony Uraco | [@JavierAnthonyUS] |
-| Sebastian Fernandez | [@SebastianFernandez] |
+| Sebastian Fernandez | [@TucoSquare] |
 
 **Institución:** Universidad Nacional Agraria la Molina  
 **Curso:** Lenguaje de Programación 2 
