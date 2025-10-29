@@ -23,6 +23,9 @@
 3. [Marco Teórico](#3-marco-teórico)
 4. [Diseño y Arquitectura](#4-diseño-y-arquitectura)
 5. [Implementación](#5-implementación)
+6. [Pruebas y Validación](#6-pruebas-y-validación)
+7. [Conclusiones](#7-conclusiones)
+
 ---
 
 ## 1. INTRODUCCIÓN
